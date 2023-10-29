@@ -16,3 +16,21 @@
 
 # Basic server create 
 
+# database connect 
+
+1. database configure
+ ```
+    config > databaseConfig.js
+
+ ```
+
+2.  Database localhost connect 
+
+```
+    "mongodb://localhost:27017/my_data"
+```
+
+3. database mongoodb Atlas cluster connect 
+ ```
+    mongodb+srv://<username>:<password>@cluster.mongodb.net/
+ ```
