@@ -40,5 +40,8 @@
  1. user Schema define 
 
  2. controller define 
- 
 
+
+# signin
+
+1. jWT token create 

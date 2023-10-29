@@ -1,3 +1,4 @@
+const { use } = require("../app");
 const userModel = require("../model/userSchema");
 const emailValidator = require('email-validator')
 
@@ -59,6 +60,61 @@ const signup = async (req, res, next) =>
    
 }
 
+const signin = async (req, res) =>{
+    const { email , password } =req.body;
+//validation 
+    if(!email || !password){
+        return res.status(400).json({
+            success : false,
+            message:"Every field is mandatory"
+        })
+    }
+
+    try{
+
+        //email id exist in database 
+    const user = await userModel
+    .findOne({
+
+        email
+    })
+    .select('+password');
+
+    // 
+    if(!user || user.password !== password){
+        return res.status(400).json({
+            success : false,
+            message:"Invalid "
+        })
+    }
+
+    const token = user.jwtToken();
+    user.password = undefined; //password leek
+
+    const cookieOption = {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true // client side not access 
+    };
+    //cookie set 
+    res.cookie("token" ,token, cookieOption);
+    res.status(200).json({
+        success:true,
+        data: user
+    })
+
+    }
+    catch(e){
+
+        res.status(400).json({
+            success:false,
+            message:e.message
+        })
+    }
+    
+
+}
+
 module.exports = {
     signup,
+    signin
 }
