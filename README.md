@@ -34,3 +34,11 @@
  ```
     mongodb+srv://<username>:<password>@cluster.mongodb.net/
  ```
+
+ # Signup 
+
+ 1. user Schema define 
+
+ 2. controller define 
+ 
+
