@@ -1,13 +1,14 @@
 const express = require('express');
-const { signup } = require('./controller/authController');
 const authRouter = require('./router/authRoute.js');
 const databaseconnect = require('./config/databaseConfig');
 const app = express(); // express instance create 
+const cookieParser = require('cookie-parser')
 
 //database connect 
 databaseconnect();
 
 app.use(express.json())
+app.use(cookieParser());
 app.use('/api/auth/',authRouter)
 //basic route create 
 app.use('/', (req, res)=>{
